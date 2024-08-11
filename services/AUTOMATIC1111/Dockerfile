@@ -25,14 +25,18 @@ RUN --mount=type=cache,target=/var/cache/apt \
   # extensions needs those
   ffmpeg libglfw3-dev libgles2-mesa-dev pkg-config libcairo2 libcairo2-dev build-essential
 
-
 WORKDIR /
 RUN --mount=type=cache,target=/root/.cache/pip \
-  git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git && \
-  cd stable-diffusion-webui && \
-  git reset --hard v1.9.4 && \
-  pip install -r requirements_versions.txt
-
+  pip install --upgrade pip && \
+  pip install --upgrade \
+  pyngrok \
+  xformers==0.0.26.post1 \
+  altair==5.1.2 \
+  gradio==3.41.2 \
+  typing-extensions==4.8.0 \
+  git+https://github.com/TencentARC/GFPGAN.git@8d2447a2d918f8eba5a4a01463fd48e45126a379 \
+  git+https://github.com/openai/CLIP.git@d50d76daa670286dd6cacf3bcd80b5e4823fc8e1 \
+  git+https://github.com/mlfoundations/open_clip.git@v2.20.0
 
 ENV ROOT=/stable-diffusion-webui
 
